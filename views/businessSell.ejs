@@ -1,0 +1,27 @@
+<form action="/businessSell/<%= query %>" method="POST" enctype="multipart/form-data">
+    <!-- <h2>What are you selling?</h2> -->
+    <h2>Upload Your Product Below...</h2>
+    <!-- <input type="radio" name="wasteType" id="wasteType" value="plastics">Plastics <br>
+    <input type="radio" name="wasteType" id="wasteType" value="electronics">Electronics <br> -->
+    
+    <h2>Quantity Available</h2>
+    <input type="number" name="productQuantity" id="productQuantity" value="productQuantity">
+    <select name="productQuantityUnit" id="productQuantityUnit">
+        <option value="Kg">kg</option>
+        <option value="piece">pc</option>
+    </select>
+    <h2>Product Name:</h2><br>
+    <input type="text" name="productName" id="productName">
+    <br>
+    <br>
+    <h2>Description:</h2>
+    <textarea name="productDescription" id="productDescription" cols="30" rows="5">
+        provide description here..
+    </textarea>
+    
+    <h3>Upload Image if any</h3>
+    <input type="file" id="productPicture" name="productImage" /><br>
+    <br>
+    <button type="submit">submit</button>
+    
+    </form>

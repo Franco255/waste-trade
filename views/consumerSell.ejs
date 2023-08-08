@@ -1,0 +1,23 @@
+<form action="/consumerSell/<%= query %>" method="POST" enctype="multipart/form-data">
+<h2>What are you selling?</h2>
+<input type="radio" name="wasteType" id="wasteType" value="plastics">Plastics <br>
+<input type="radio" name="wasteType" id="wasteType" value="electronics">Electronics <br>
+
+<h2>Quantity</h2>
+<input type="number" name="quantity" id="quantity" value="quantity">
+<select name="quantityUnit" id="quantityUnit">
+    <option value="Kg">kg</option>
+    <option value="piece">pc</option>
+</select>
+<br>
+<h2>Description:</h2>
+<textarea name="description" id="description" cols="30" rows="5">
+    provide description here..
+</textarea>
+
+<h3>Upload Image if any</h3>
+<input type="file" id="picture" name="wasteImage" /><br>
+<br>
+<button type="submit">submit</button>
+
+</form>

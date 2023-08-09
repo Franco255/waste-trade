@@ -11,20 +11,25 @@
 
   <script>
     // JavaScript to fetch and render product data
-    fetch('/consumerBrowse')
-      .then(response => response.json())
-      .then(products => {
-        const productListElement = document.getElementById('products');
-        products.forEach(product => {
-          const listItem = document.createElement('li');
-          listItem.textContent = `${product.productName} - ${product.quantity} - ${product.description}`;
-          productListElement.appendChild(listItem);
-          
+    async function fetchProducts() {
+        try{
+            const response = await fetch('/consumerBrowse');
+            const products = await response.json();
+            console.log(products);
+            const productListElement = document.getElementById('products');
+
+            // the loop statement needs to be optimized
+            products.forEach(products => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${products.productName} - ${products.quantity} - ${products.description}`;
+                productListElement.appendChild(listItem);
         });
-      })
-      .catch(error => {
-        console.error('Error fetching products:', error);
-      });
+    } catch (error) {
+        console.log(`encountered the following error while fetching products: ${error}`);
+    }}
+
+    fetchProducts();
+    
   </script>
 
 </body>

@@ -11,20 +11,23 @@
 
   <script>
     // JavaScript to fetch and render product data
-    fetch('/businessBrowse')
-      .then(response => response.json())
-      .then(products => {
-        const productListElement = document.getElementById('WasteList');
-        products.forEach(waste => {
-          const listItem = document.createElement('li');
-          listItem.textContent = `${waste.wasteType} - ${waste.quantity} - ${waste.description}`;
-          productListElement.appendChild(listItem);
-          
-        });
-      })
-      .catch(error => {
-        console.error('Error fetching products:', error);
-      });
+    async function fetchWaste() {
+      try{
+          const response = await fetch('/businessBrowse');
+          const waste = await response.json();
+
+          const wasteListElement = document.getElementById('WasteList');
+
+          //looping statement *** needs to be optimized
+          waste.forEach(waste => {
+            const listItem = document.createElement('li');
+            listItem.textContent = `${waste.wasteType} - ${waste.quantity} - ${waste.description}`;
+            wasteListElement.appendChild(listItem);
+          });
+      }catch(error) {
+        console.log(`encountered the following error while fetching: ${error}`);
+      }
+    }
   </script>
 
 </body>

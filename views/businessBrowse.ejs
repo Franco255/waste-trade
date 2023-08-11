@@ -17,17 +17,20 @@
           const waste = await response.json();
 
           const wasteListElement = document.getElementById('WasteList');
-
-          //looping statement *** needs to be optimized
-          waste.forEach(waste => {
-            const listItem = document.createElement('li');
-            listItem.textContent = `${waste.wasteType} - ${waste.quantity} - ${waste.description}`;
-            wasteListElement.appendChild(listItem);
+          
+          //using map to list the fetched elements
+          const wasteItems = waste.map(waste=> {
+            return `<li>${waste.wasteType} - ${waste.quantity} - ${waste.description}</li>`
           });
+
+          wasteListElement.innerHTML = wasteItems.join('')
       }catch(error) {
         console.log(`encountered the following error while fetching: ${error}`);
       }
     }
+
+    fetchWaste();
+    
   </script>
 
 </body>

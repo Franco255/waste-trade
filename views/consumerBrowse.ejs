@@ -18,12 +18,13 @@
             console.log(products);
             const productListElement = document.getElementById('products');
 
-            // the loop statement needs to be optimized
-            products.forEach(products => {
-                const listItem = document.createElement('li');
-                listItem.textContent = `${products.productName} - ${products.quantity} - ${products.description}`;
-                productListElement.appendChild(listItem);
+        //using map to list the fetched products
+        const productItems = products.map(products=> {
+          return `<li>${products.productName} - ${products.quantity} - ${products.description}</li>`;
         });
+
+        productListElement.innerHTML = productItems.join('');
+
     } catch (error) {
         console.log(`encountered the following error while fetching products: ${error}`);
     }}

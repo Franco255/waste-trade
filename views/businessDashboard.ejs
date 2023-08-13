@@ -1,4 +1,30 @@
-Welcome to Your Business' Dashboard <br>
+<h3>Welcome to Your Business' Dashboard </h3>
 
 <a href="/businessSell/<%= query %>">Upload new product(s)</a><br>
-<a href="/businessBrowse/businessBrowseView">Browse materials</a>
+<a href="/businessBrowse/businessBrowseView">Browse materials</a><br>
+<br>
+Your company: <%= query %> Currently has: <%= tokens %> tokens
+
+<h3>Buy more tokens💠</h3>
+Rate: <br>
+1💠 = 20Tsh <br>
+<h4>how many tokens do you want to buy?</h4>
+<form action="/businessDashboard/<%= query %>" method="post" onsubmit="return validateForm()">
+<input type="number" name="token" id="tokenInput" required>
+<button value="submit">BUY</button>
+</form>
+
+<script>
+    function validateForm() {
+        var tokenInput = document.getElementById('tokenInput').value;
+
+        //checking if the input is valid
+        if (isNaN(tokenInput) || tokenInput === ''){
+            alert('Please enter a valid number of tokens');
+            return false;//this prevents the form submission
+        }
+
+        return true; //this allows form submission
+    }
+</script>
+Price: 

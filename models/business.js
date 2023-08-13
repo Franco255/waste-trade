@@ -13,7 +13,8 @@ mongoose.connect(uri)
 const businessSchema = new mongoose.Schema({
     username: String,
     password: String,
-    type: String
+    type: String,
+    tokenAmount: Number
 });
 
 //configure passport plugin

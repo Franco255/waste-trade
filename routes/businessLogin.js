@@ -9,7 +9,9 @@ router.get('/', (req, res) => {
 router.post('/', passport.authenticate('businessLocal', {
     failureRedirect: '/businessRegister'
 }), (req, res) => {
-    res.send('login success')
+    const businessName = req.body.username;
+    // res.send('login success')
+    res.redirect(`/businessDashboard/${businessName}`)
 })
 
 module.exports = router

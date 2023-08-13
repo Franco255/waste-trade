@@ -12,7 +12,7 @@ router.post('/', passport.authenticate('consumerLocal', {
     const name = req.body.username;
     console.log(name);
     // res.send('login success')
-    res.redirect(`/consumerDashboard/:${name}`)
+    res.redirect(`/consumerDashboard/${name}`)
 })
 
 module.exports = router

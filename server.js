@@ -1,6 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const session = require('express-session');
+const flash = require('express-flash');
 const app = express();
 const LocalStrategy = require('passport-local').Strategy;
 
@@ -36,6 +37,8 @@ app.use(session({
     saveUninitialized: true,
     cookie: {maxAge: 60*60*60 }
 }))
+
+app.use(flash());
 
 //configuring passport for authentication
 app.use(passport.initialize());

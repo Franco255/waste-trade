@@ -13,7 +13,8 @@ const consumerSchema = new mongoose.Schema({
     username: String,
     number: String,
     email: String,
-    password: String
+    password: String,
+    tokenAmount: Number
 });
 
 //configure passport plugin

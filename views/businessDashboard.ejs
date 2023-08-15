@@ -10,9 +10,11 @@ Rate: <br>
 1💠 = 20Tsh <br>
 <h4>how many tokens do you want to buy?</h4>
 <form action="/businessDashboard/<%= query %>" method="post" onsubmit="return validateForm()">
-<input type="number" name="token" id="tokenInput" required>
+<input type="number" name="token" id="tokenInput" required oninput="calculatePrice()">
 <button value="submit">BUY</button>
 </form>
+
+Price: <span id="priceDisplay">0 Tsh</span>
 
 <script>
     function validateForm() {
@@ -26,5 +28,12 @@ Rate: <br>
 
         return true; //this allows form submission
     }
+
+    function calculatePrice() {
+        var tokenInput = document.getElementById('tokenInput').value;
+        var price = tokenInput * 20;
+        var priceDisplay = document.getElementById('priceDisplay');
+        priceDisplay.textContent = price + 'Tsh'
+    }
 </script>
-Price: 
+ 

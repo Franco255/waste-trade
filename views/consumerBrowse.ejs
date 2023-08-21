@@ -1,4 +1,4 @@
-<!-- products.ejs -->
+<!-- consumerBrowse.ejs -->
 
 <!DOCTYPE html>
 <html>
@@ -10,28 +10,31 @@
   <ul id="products"></ul>
 
   <script>
-    // JavaScript to fetch and render product data
     async function fetchProducts() {
-        try{
-            const response = await fetch('/consumerBrowse');
-            const products = await response.json();
-            console.log(products);
-            const productListElement = document.getElementById('products');
+      try {
+        const response = await fetch('/consumerBrowse');
+        const products = await response.json();
+        console.log(products);
+        const productListElement = document.getElementById('products');
 
-        //using map to list the fetched products
-        const productItems = products.map(products=> {
-          return `<li>${products.productName} - ${products.quantity} - ${products.description}</li>`;
+        const productItems = products.map(product => {
+          return `
+            <li>
+              <strong>${product.productName}</strong><br>
+              Quantity: ${product.quantity}<br>
+              Description: ${product.description}<br>
+              <img src="${product.imageDataBase64}" alt="Product Image" width="100">
+            </li>
+          `;
         });
 
         productListElement.innerHTML = productItems.join('');
-
-    } catch (error) {
-        console.log(`encountered the following error while fetching products: ${error}`);
-    }}
+      } catch (error) {
+        console.log(`Encountered the following error while fetching products: ${error}`);
+      }
+    }
 
     fetchProducts();
-    
   </script>
-
 </body>
 </html>

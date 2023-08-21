@@ -12,7 +12,11 @@ const buinessSellSchema = new mongoose.Schema({
     businessName: String,
     productName: String,
     quantity: Number,
-    description: String
+    description: String,
+    image: {
+        data: Buffer,
+        mimeType: String
+    }
 });
 
 //export the model

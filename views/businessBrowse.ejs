@@ -20,7 +20,14 @@
           
           //using map to list the fetched elements
           const wasteItems = waste.map(waste=> {
-            return `<li>${waste.wasteType} - ${waste.quantity} - ${waste.description}</li>`
+            return `
+              <li>
+                <strong>${waste.wasteType}</strong><br> 
+                <img src="${waste.imageDataBase64}" alt="Waste Image" width="300"><br>
+                Quantity: ${waste.quantity}<br>
+                Description: ${waste.description}<br>
+                </li>
+                `;
           });
 
           wasteListElement.innerHTML = wasteItems.join('')

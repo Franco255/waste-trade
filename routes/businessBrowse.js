@@ -15,8 +15,17 @@ router.get('/', (req, res) => {
             const db = client.db('test');
             const consumersellmodels = db.collection('consumersellmodels');
 
-            const productDetails = await consumersellmodels.find().toArray();
-            let productDetailsJson = JSON.parse(JSON.stringify(productDetails));
+            const productDetails = await consumersellmodels.find({}).toArray();
+
+            const productData = productDetails.map(product => {
+                const imageDataBuffer = product.image.data;
+                
+                return {
+                    ...product,
+                    imageDataBase64: `data:${product.image.mimeType};base64,${imageDataBuffer}`
+                };
+            });
+            const productDetailsJson = JSON.parse(JSON.stringify(productData));
             
             res.json(productDetailsJson);
         }finally{

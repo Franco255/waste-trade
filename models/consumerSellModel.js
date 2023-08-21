@@ -12,7 +12,11 @@ const consumerSellSchema = new mongoose.Schema({
     consumerName: String,
     wasteType: String,
     quantity: Number,
-    description: String
+    description: String,
+    image: {
+        data: Buffer,
+        mimeType: String
+    }
 });
 
 //export the model

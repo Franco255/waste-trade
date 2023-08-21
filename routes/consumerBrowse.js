@@ -20,7 +20,6 @@ router.get('/', (req, res) => {
 
             const productData = productsWithImages.map(product => {
                 const imageDataBuffer = product.image.data;
-                console.log(imageDataBuffer);
 
                 return {
                     ...product,

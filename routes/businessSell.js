@@ -45,7 +45,7 @@ router.post('/:name', upload.single('productImage'), (req, res) => {
 
     newProduct.save((newProduct));
 
-    res.send('upload Success...');
+    res.redirect(`/businessDashboard/${name}`);
 })
 
 module.exports = router

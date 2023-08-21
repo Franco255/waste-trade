@@ -45,7 +45,7 @@ router.post('/:name', upload.single('wasteImage'), (req, res) => {
 
     newWaste.save((newWaste));
 
-    res.send('post success...');
+    res.redirect(`/consumerDashboard/${name}`);
 })
 
 module.exports = router

@@ -1,4 +1,4 @@
-<!-- products.ejs -->
+<!-- waste.ejs -->
 
 <!DOCTYPE html>
 <html>
@@ -10,6 +10,16 @@
   <ul id="WasteList"></ul>
 
   <script>
+    // Function to handle the click event and send data
+    function handleItemClick(wasteId) {
+            console.log(wasteId);
+          // Create a URL for the "/wasteView" route with the wasteId as a query parameter
+          const url = `/wasteView?wasteId=${wasteId}`;
+
+          // Navigate to the "/wasteView" route
+          window.location.href = url;
+          }
+
     // JavaScript to fetch and render product data
     async function fetchWaste() {
       try{
@@ -22,11 +32,13 @@
           const wasteItems = waste.map(waste=> {
             return `
               <li>
+                <a href="#" onclick="handleItemClick('${waste._id}')">
                 <strong>${waste.wasteType}</strong><br> 
                 <img src="${waste.imageDataBase64}" alt="Waste Image" width="300"><br>
                 Quantity: ${waste.quantity}<br>
                 Description: ${waste.description}<br>
                 </li>
+                </a>
                 `;
           });
 

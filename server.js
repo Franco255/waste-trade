@@ -22,6 +22,7 @@ const businessBrowse = require('./routes/businessBrowse');
 const businessSell = require('./routes/businessSell');
 const consumerBrowse = require('./routes/consumerBrowse');
 const businessDashboard = require('./routes/businessDashboard');
+const wasteView = require('./routes/wasteView');
 
 //configuring the view engine
 app.set('view-engine', 'ejs');
@@ -81,6 +82,8 @@ app.use('/businessSell', businessSell)
 app.use('/consumerBrowse', consumerBrowse)
 
 app.use('/businessDashboard', businessDashboard)
+
+app.use('/wasteView', wasteView)
 
 app.all('*', (req, res) => {
     res.status(404).send('404! Oooops sorry Page Not Found')

@@ -20,15 +20,29 @@ router.get('/', (req, res) => {
             var id = new ObjectId(wasteId)
             
             const options = {
-                projection: {_id: 0, consumerName: 1, wasteType: 1, quantity: 1, description: 1, image: 1}
+                projection: {
+                    _id: 0, 
+                    consumerName: 1, 
+                    wasteType: 1, 
+                    quantity: 1, 
+                    description: 1, 
+                    image: 1
+                }
             }
 
-            const details = await consumersellmodels.findOne({_id: id}, options)
+            const details = await consumersellmodels.find({_id: id}, options).toArray()
 
-            //converting to JSON
-            const detailsJson = JSON.parse(JSON.stringify(details))
+            const detailsWithImage = details.map(product => {
+                const imageDataBuffer = product.image.data;
+                
+                return {
+                    ...product,
+                    imageDataBase64: `data:${product.image.mimeType};base64,${imageDataBuffer}`
+                };
+            });
             
-            res.json(detailsJson)
+            console.log(detailsWithImage);
+            res.render('wasteView.ejs', {details: detailsWithImage})
         } finally {
             await client.close();
         }
@@ -36,5 +50,9 @@ router.get('/', (req, res) => {
 
     wasteDetails();
 });
+
+// router.get('/wasteItem', (req, res) => {
+//     res.render('wasteView.ejs');
+// })
 
 module.exports = router

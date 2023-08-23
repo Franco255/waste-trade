@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wasteView</title>
+</head>
+<body>
+    <img src="<%= details[0].imageDataBase64 %>" alt="wasteItem" width="400"><br>
+    Product Description: <%= details[0].description %><br>
+    Quantity: <%= details[0].quantity %><br>
+    Seller's name: <%= details[0].consumerName %><br>
+    
+
+
+
+    <!-- <script>
+        async function viewWaste() {
+            try {
+                const response = await fetch(`/wasteView?wasteId=${wasteId}`);//based on how the data is being sent
+                //this is how the fetch parameter is supposed to look like but 
+                //wasteId is not defined in this file
+                //use route parameters in the route file and query them in this file
+                const waste = await response.json();
+                console.log(response);
+                console.log(waste);
+
+                const wasteElement = document.getElementById('wasteItem');
+
+                //using map 
+                const wasteItem = waste.map(waste => {
+                    return `
+                    <img src="${waste.imageDataBase64}" alt="Waste Image" width="300"><br>
+                    Quantity: ${waste.quantity}<br>
+                    Description: ${waste.description}<br>
+                    `
+                });
+
+                wasteListElement.innerHTML = wasteItems.join('')
+            } catch (error) {
+                console.log(`Encountered the following error: ${error}`);
+            }
+        }
+
+        viewWaste();
+    </script> -->
+</body>
+</html>

@@ -4,7 +4,7 @@ const router = express.Router();
 const {MongoClient, ObjectId} = require('mongodb');
 
 router.get('/', (req, res) => {
-    const wasteId = req.query.wasteId
+    const productId = req.query.productId
 
     //fetching logic
     let uri = process.env.MONGO_URI;
@@ -12,44 +12,44 @@ router.get('/', (req, res) => {
 
     const client = new MongoClient(uri);
 
-    async function wasteDetails() {
+    async function productDetails() {
         try {
             const db = client.db('test');
-            const consumersellmodels = db.collection('consumersellmodels');
+            const businesssellmodels = db.collection('businesssellmodels');
 
-            var id = new ObjectId(wasteId)
-            
+            var id = new ObjectId(productId);
+
             const options = {
                 projection: {
-                    _id: 0, 
-                    consumerName: 1, 
-                    wasteType: 1, 
-                    quantity: 1, 
-                    description: 1, 
-                    image: 1
+                  _id: 0,
+                  businessName: 1,
+                  productName: 1,
+                  quantity: 1,
+                  description: 1,
+                  image: 1  
                 }
             }
 
-            const details = await consumersellmodels.find({_id: id}, options).toArray()
+            const details = await businesssellmodels.find({_id: id}, options).toArray()
 
             const detailsWithImage = details.map(product => {
                 const imageDataBuffer = product.image.data;
-                
+
                 return {
                     ...product,
                     imageDataBase64: `data:${product.image.mimeType};base64,${imageDataBuffer}`
                 };
             });
-            
-            console.log(detailsWithImage);
-            res.render('wasteView.ejs', {details: detailsWithImage})
-        } finally {
+
+            res.render('productView.ejs', {details: detailsWithImage})
+        }finally {
             await client.close();
         }
     }
 
-    wasteDetails();
-});
+    productDetails();
+    
+})
 
 
 module.exports = router

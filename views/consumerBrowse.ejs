@@ -10,20 +10,31 @@
   <ul id="products"></ul>
 
   <script>
+    //function to handle the click event
+    function handleItemClick(productId) {
+      const url = `/productView?productId=${productId}`;
+
+      //navigating to /productView route
+      window.location.href = url
+    }
+
+    //Javascript to fetch and render product data
     async function fetchProducts() {
       try {
         const response = await fetch('/consumerBrowse');
         const products = await response.json();
-        console.log(products);
+
         const productListElement = document.getElementById('products');
 
         const productItems = products.map(product => {
           return `
             <li>
+              <a href="#" onclick="handleItemClick('${product._id}')">
               <strong>${product.productName}</strong><br>
               <img src="${product.imageDataBase64}" alt="Product Image" width="300"><br>
               Quantity: ${product.quantity}<br>
               Description: ${product.description}<br>
+              </a>
             </li>
           `;
         });

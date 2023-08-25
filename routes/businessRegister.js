@@ -17,6 +17,7 @@ router.post('/', async (req, res) => {
     var name = req.body.name;
     var pass = req.body.password;
     var type = req.body.businessType;
+    var phoneNo = req.body.phoneNumber;
 
     const db = client.db('test');
     const businesses = db.collection('businesses');
@@ -28,7 +29,12 @@ router.post('/', async (req, res) => {
             req.flash('error_msg', 'name already exists');//flash message is not being displayed fix it!!!
             return res.redirect('/businessRegister');
         } else {
-            Business.register({username: name, type: type, tokenAmount: 123, active:false}, pass);
+            Business.register({
+                username: name, 
+                type: type, 
+                tokenAmount: 123, 
+                number: phoneNo,
+                active:false}, pass);
 
             req.flash('info', 'successfully registered');
             res.redirect(`/businessDashboard/${name}`)

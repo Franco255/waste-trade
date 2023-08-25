@@ -13,6 +13,7 @@ mongoose.connect(uri)
 const businessSchema = new mongoose.Schema({
     username: String,
     number: Number,
+    email: String,
     password: String,
     type: String,
     tokenAmount: Number

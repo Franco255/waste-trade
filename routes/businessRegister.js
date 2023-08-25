@@ -18,6 +18,7 @@ router.post('/', async (req, res) => {
     var pass = req.body.password;
     var type = req.body.businessType;
     var phoneNo = req.body.phoneNumber;
+    var email = req.body.email;
 
     const db = client.db('test');
     const businesses = db.collection('businesses');
@@ -31,9 +32,10 @@ router.post('/', async (req, res) => {
         } else {
             Business.register({
                 username: name, 
-                type: type, 
-                tokenAmount: 123, 
                 number: phoneNo,
+                email: email,
+                type: type, 
+                tokenAmount: 123,
                 active:false}, pass);
 
             req.flash('info', 'successfully registered');

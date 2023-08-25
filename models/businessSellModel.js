@@ -11,6 +11,7 @@ mongoose.connect(uri)
 const buinessSellSchema = new mongoose.Schema({
     businessName: String,
     productName: String,
+    productPrice: Number,
     quantity: Number,
     description: String,
     image: {

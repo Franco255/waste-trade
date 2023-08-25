@@ -24,6 +24,7 @@ router.get('/', (req, res) => {
                   _id: 0,
                   businessName: 1,
                   productName: 1,
+                  productPrice: 1,
                   quantity: 1,
                   description: 1,
                   image: 1  

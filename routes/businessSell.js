@@ -16,6 +16,7 @@ router.post('/:name', upload.single('productImage'), (req, res) => {
     const {name} = req.params;
 
     var productName = req.body.productName;
+    var productPrice = req.body.productPrice;
     var productQuantity = req.body.productQuantity;
     var productDescription = req.body.productDescription;
 
@@ -35,6 +36,7 @@ router.post('/:name', upload.single('productImage'), (req, res) => {
     let newProduct = new BusinessSellModel({
         businessName: name, 
         productName: productName, 
+        productPrice: productPrice,
         quantity: productQuantity, 
         description: productDescription,
         image: {

@@ -25,6 +25,7 @@ const businessDashboard = require('./routes/businessDashboard');
 const wasteView = require('./routes/wasteView');
 const productView = require('./routes/productView');
 
+
 //configuring the view engine
 app.set('view-engine', 'ejs');
 

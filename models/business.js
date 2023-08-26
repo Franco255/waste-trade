@@ -12,7 +12,7 @@ mongoose.connect(uri)
 //create the model
 const businessSchema = new mongoose.Schema({
     username: String,
-    number: Number,
+    number: String,
     email: String,
     password: String,
     type: String,

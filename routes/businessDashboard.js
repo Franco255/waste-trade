@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const {MongoClient} = require('mongodb');
+const sendSMS = require('../utils/sendSMS');
 
 let uri = process.env.MONGO_URI;
 uri = uri.replace('<password>', process.env.MONGO_PASS);
@@ -48,6 +49,13 @@ router.post('/:name', (req, res) => {
                 {username: name},
                 {$inc: {tokenAmount: tokensBought}}
             )
+
+            //querying the phone number
+            const businessDetails = await businesses.find({username: name}).toArray();
+            const businessNo = businessDetails[0].number;
+            const currentToken = businessDetails[0].tokenAmount;
+
+            sendSMS(businessNo, `Your company has bought: ${tokensBought} token(s), you currently have: ${currentToken}`);
 
             res.redirect(`/businessDashboard/${name}`);
         }finally {

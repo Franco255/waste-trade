@@ -1,20 +1,49 @@
+require('dotenv').config();
 const express = require('express');
 const router = express.Router();
+const {MongoClient} = require('mongodb');
 const Consumer = require('../models/consumer');
+const keyGen = require('../utils/keyGenerator');
+const sendSMS = require('../utils/sendSMS');
+
+let uri = process.env.MONGO_URI;
+uri = uri.replace('<password>', process.env.MONGO_PASS);
+
+const client = new MongoClient(uri);
 
 router.get('/', (req, res) => {
     res.render('consumerRegister.ejs');
 })
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
     var name = req.body.username;
     var phoneNumber = req.body.No;
     var email = req.body.email;
     var pass = req.body.password;
 
-    Consumer.register({username: name, number: phoneNumber, email: email, active: false}, pass);
+    const walletPass = keyGen();
 
-    res.send('Registration success')
+    Consumer.register({
+        username: name, 
+        number: phoneNumber, 
+        email: email,
+        walletPass: walletPass,
+        tokenAmount: 10, 
+        active: false}, pass);
+
+        //querying phone number from collection
+        const db = client.db('test');
+        const consumers = db.collection('consumers');
+
+        const consumerDetails = await consumers.find({username: name}).toArray();
+        const consumerNo = consumerDetails[0].number;
+
+        const text = 
+        `Welcome ${name}, You have successfully registered, Your Token wallet password is ${walletPass}, please keep it safe`
+
+        sendSMS(consumerNo, text);
+
+    res.redirect(`/consumerDashboard/${name}`)
 })
 
 module.exports = router

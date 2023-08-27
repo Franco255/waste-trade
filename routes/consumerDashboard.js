@@ -20,7 +20,7 @@ router.get('/:name', (req, res) => {
 
             const consumerDetails = await consumers.find({username: name}).toArray();
             const tokenAmount = consumerDetails[0].tokenAmount;
-            console.log(tokenAmount);
+            // console.log(tokenAmount);
         } finally {
             await client.close();
         }

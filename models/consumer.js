@@ -14,6 +14,7 @@ const consumerSchema = new mongoose.Schema({
     number: String,
     email: String,
     password: String,
+    walletPass: String,
     tokenAmount: Number
 });
 

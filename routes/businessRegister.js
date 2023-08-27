@@ -2,6 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const Business = require('../models/business');
+const keyGen = require('../utils/keyGenerator');
+const sendSMS = require('../utils/sendSMS');
 const {MongoClient} = require('mongodb');
 
 let uri = process.env.MONGO_URI;
@@ -20,6 +22,8 @@ router.post('/', async (req, res) => {
     var phoneNo = req.body.phoneNumber;
     var email = req.body.email;
 
+    const walletPass = keyGen();
+
     const db = client.db('test');
     const businesses = db.collection('businesses');
 
@@ -35,8 +39,15 @@ router.post('/', async (req, res) => {
                 number: phoneNo,
                 email: email,
                 type: type, 
+                walletPass: walletPass,
                 tokenAmount: 123,
                 active:false}, pass);
+
+                //Sending SMS
+                const text = 
+                `You have successfully registered, your wallet password is: ${walletPass}`;
+
+                sendSMS(phoneNo, text);
 
             req.flash('info', 'successfully registered');
             res.redirect(`/businessDashboard/${name}`)

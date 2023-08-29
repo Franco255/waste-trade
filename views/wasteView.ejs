@@ -10,6 +10,18 @@
     Product Description: <%= details[0].description %><br>
     Quantity: <%= details[0].quantity %><br>
     Seller's name: <%= details[0].consumerName %><br>
+
+    <form action="/wasteView/buyWithToken" method="post">
+        <h3>Buy using your tokens:</h3>
+        <input type="hidden" name="consumerName" value="<%= details[0].consumerName %>">
+        <input type="number" id="tokenAmount" name="tokenAmount"
+            placeholder="Tokens Agreed Upon"><br>
+        <input type="text" id="businessName" name="businessName"
+            placeholder="Your business name"><br>
+        <input type="password" id="walletPass" name="walletPass"
+            placeholder="Your wallet password"><br>
+        <button value="submit">BUY</button>
+    </form>
     
 </body>
 </html>

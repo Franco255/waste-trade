@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const {MongoClient, ObjectId} = require('mongodb');
+const sendSMS = require('../utils/sendSMS');
 
 router.get('/', (req, res) => {
     const wasteId = req.query.wasteId
@@ -41,7 +42,7 @@ router.get('/', (req, res) => {
                 };
             });
             
-            console.log(detailsWithImage);
+            // console.log(detailsWithImage);
             res.render('wasteView.ejs', {details: detailsWithImage})
         } finally {
             await client.close();
@@ -51,5 +52,69 @@ router.get('/', (req, res) => {
     wasteDetails();
 });
 
+router.post('/buyWithToken', (req, res) => {
+    var tokenAgreed = parseInt(req.body.tokenAmount);
+    var name = req.body.businessName;
+    var walletPass = req.body.walletPass;
+    var consumerName = req.body.consumerName;
+
+    //connect with client and then query
+    let uri = process.env.MONGO_URI;
+    uri = uri.replace('<password>', process.env.MONGO_PASS);
+
+    const client = new MongoClient(uri);
+
+    async function verifyBusinessWallet() {
+        try{
+            const db = client.db('test');
+            const businesses = db.collection('businesses');
+            const consumers = db.collection('consumers');
+
+            const businessDetails = await businesses.find({username: name}).toArray();
+            const trueWalletPass = businessDetails[0].walletPass;
+            const businessNo = businessDetails[0].number;
+
+            const consumerDetails = await consumers.find({username: consumerName}).toArray();
+            const consumerNo = consumerDetails[0].number;
+
+            //checking if wallet password matches
+            if(walletPass != trueWalletPass) {
+                res.send('Incorect wallet credentials');
+            } else {
+                //if the wallet password is correct 
+                //decrease value in business wallet
+                await businesses.updateOne(
+                    {username: name},
+                    {$inc: {tokenAmount: -tokenAgreed}}
+                )
+
+                //increasing value in consumer wallet
+                await consumers.updateOne(
+                    {username: consumerName},
+                    {$inc: {tokenAmount: tokenAgreed}}
+                )
+
+                //sending SMS
+                //to business
+                const textToBusiness =
+                `You have successfully transfered ${tokenAgreed} tokens, to ${consumerName}`
+
+                sendSMS(businessNo, textToBusiness);
+
+                //to consumer
+                const textToConsumer =
+                `You have received ${tokenAgreed} tokens, from ${name}`
+
+                sendSMS(consumerNo, textToConsumer);
+
+                // res.redirect('/wasteView');
+                res.send('successfully paid')
+            }
+        }finally {
+            await client.close()
+        }
+    }
+    verifyBusinessWallet();
+})
 
 module.exports = router

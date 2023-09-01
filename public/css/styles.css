@@ -1,0 +1,47 @@
+/* CSS styles for message container and chat bubbles */
+.chat-container {
+    width: 80%; /* Adjust to your preferred width */
+    max-width: 800px; /* Set a maximum width if needed */
+    margin: 0 auto; /* Center the container horizontally */
+    padding: 20px; /* Add some padding for spacing */
+    border: 1px solid #ccc; /* Add a border if desired */
+    border-radius: 10px; /* Add border radius for rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 5); /* Add a box shadow for depth */
+}
+
+.input-box {
+    width: 80%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.chat-messages {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align incoming messages to the left */
+    padding: 10px;
+    overflow-y: auto; /* Enable scrolling for long conversations */
+    max-height: 400px; /* Adjust as needed */
+}
+
+.message {
+    margin: 5px 0;
+    padding: 5px 10px;
+    border-radius: 10px;
+    max-width: 80%; /* Adjust to your preferred maximum width */
+}
+
+.incoming {
+    background-color: gray; /* Background color for incoming messages */
+    align-self: flex-start;
+}
+
+.outgoing {
+    background-color: #007bff; /* Background color for outgoing messages */
+    color: #fff; /* Text color for outgoing messages */
+    align-self: flex-end;
+}
+
+.message-text {
+    word-wrap: break-word; /* Wrap long words in messages */
+}

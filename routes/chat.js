@@ -4,7 +4,7 @@ module.exports = function (io) {
 
     router.get('/', (req, res) => {
         // const {name} = req.params;
-        res.render('messaging.ejs');
+        res.render('chat.ejs');
     })
 
     io.on('connection', (socket) => {

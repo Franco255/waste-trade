@@ -28,10 +28,8 @@ const consumerBrowse = require('./routes/consumerBrowse');
 const businessDashboard = require('./routes/businessDashboard');
 const wasteView = require('./routes/wasteView');
 const productView = require('./routes/productView');
-const messaging = require('./routes/messaging');
+const chat = require('./routes/chat');
 
-//passing the socket.io instance to the messaging route
-// messaging(io);
 
 //configuring the view engine
 app.set('view-engine', 'ejs');
@@ -99,7 +97,7 @@ app.use('/wasteView', wasteView)
 
 app.use('/productView', productView)
 
-app.use('/messaging', messaging(io))
+app.use('/chat', chat(io))
 
 app.all('*', (req, res) => {
     res.status(404).send('404! Oooops sorry Page Not Found')

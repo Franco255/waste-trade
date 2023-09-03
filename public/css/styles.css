@@ -9,6 +9,10 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 5); /* Add a box shadow for depth */
 }
 
+.btn {
+    border-radius: 10px;
+}
+
 .input-box {
     width: 80%;
     border-radius: 10px;

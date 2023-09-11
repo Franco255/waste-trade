@@ -10,6 +10,8 @@ router.post('/', passport.authenticate('businessLocal', {
     failureRedirect: '/businessRegister'
 }), (req, res) => {
     const businessName = req.body.username;
+    req.session.username = businessName;
+
     // res.send('login success')
     res.redirect(`/businessDashboard/${businessName}`)
 })

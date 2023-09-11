@@ -1,11 +1,11 @@
 require('dotenv').config();
 const express = require('express');
+// const connectEnsureLogin = require('connect-ensure-login');
 const router = express.Router();
 const {MongoClient} = require('mongodb');
 
 router.get('/:name', (req, res) => {
     const {name} = req.params
-    console.log(name);
 
     //querying the database to get the number of tokens available
     let uri = process.env.MONGO_URI;

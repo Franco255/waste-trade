@@ -1,4 +1,3 @@
-<!-- messaging.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,9 +11,7 @@
     <!-- Add input fields, message display area, and JavaScript for messaging -->
 
     <div class="chat-container">
-
-        <div class="chat-messages"></div>
-
+        <div class="chat-messages" id="chat-container"></div>
         <div class="chat-form-container">
             <form id="chat-form">
                 <input
@@ -34,38 +31,90 @@
     <script>
         const socket = io();
 
-        socket.on('message', text => {
+        // Use the 'recipient' variable from the template to identify the recipient
+        const recipient = '<%= recipient %>';
+        const sender = '<%= sender %>';
+
+        //function to scroll to bottom
+        function scrollToBottom() {
+            const chatContainer = document.getElementById('chat-container');
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+
+        // Function to display a message on the UI
+        function displayMessage(message, messageType) {
             const messageContainer = document.createElement('div');
-            messageContainer.className = 'message incoming'; // Use 'incoming' class for incoming messages
+            messageContainer.className = `message ${messageType}`;
 
             const messageText = document.createElement('div');
             messageText.className = 'message-text';
-            messageText.textContent = text;
+            messageText.textContent = message.text;
+            console.log(message);
 
             messageContainer.appendChild(messageText);
 
             document.querySelector('.chat-messages').appendChild(messageContainer);
+            scrollToBottom();
+        }
+
+        //function to display new messages
+        function displayNewMessage(message, messageType) {
+            const messageContainer = document.createElement('div');
+            messageContainer.className = `message ${messageType}`;
+
+            const newMessage = document.createElement('div');
+            newMessage.className = 'message-text';
+            newMessage.textContent = message;
+
+            messageContainer.appendChild(newMessage);
+
+            document.querySelector('.chat-messages').appendChild(messageContainer);
+            scrollToBottom();
+        }
+
+        // Event handler for receiving messages
+        socket.on('message', (message) => {
+            // Determine the message type based on sender
+            const messageType = message.sender === sender ? 'outgoing' : 'incoming';
+            displayNewMessage(message, messageType);
         });
 
-        document.querySelector('button').onclick = () => {
-            const text = document.querySelector('input').value;
-            const messageContainer = document.createElement('div');
-            messageContainer.className = 'message outgoing'; // Use 'outgoing' class for outgoing messages
+        // Function to load and display messages
+        function loadAndDisplayMessages() {
+            // Emit a request to the server to load messages
+            socket.emit('loadMessages');
 
-            const messageText = document.createElement('div');
-            messageText.className = 'message-text';
-            messageText.textContent = text;
-
-            messageContainer.appendChild(messageText);
-
-            document.querySelector('.chat-messages').appendChild(messageContainer);
-
-            // Emit the message to the server
-            socket.emit('message', text);
-
-            // Clear the input field after sending the message
-            document.querySelector('input').value = '';
+            // Event handler to receive loaded messages from the server
+            socket.on('loadMessages', (messages) => {
+                messages.forEach((message) => {
+                    // Determine the message type based on sender
+                    const messageType = message.sender === sender ? 'outgoing' : 'incoming';
+                    displayMessage(message, messageType);
+                });
+            });
         }
+
+        // Event handler for sending messages
+        document.querySelector('#chat-form').addEventListener('submit', (event) => {
+            event.preventDefault();
+            const text = document.querySelector('#text').value;
+            
+            // Display the outgoing message on the UI
+            displayMessage({ text, sender }, 'outgoing');
+            
+            // Emit the message to the server as a private message to the recipient
+            socket.emit('private-message', { sender: sender, recipient, message: text });
+            
+            // Clear the input field after sending the message
+            document.querySelector('#text').value = '';
+        });
+
+
+        // Trigger the loading of messages when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            loadAndDisplayMessages();
+        });
     </script>
 </body>
 </html>

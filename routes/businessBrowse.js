@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const connectEnsureLogin = require('connect-ensure-login');
 const router = express.Router();
 const {MongoClient} = require('mongodb');
 
@@ -35,7 +36,7 @@ router.get('/', (req, res) => {
     consumerProducts();
 })
 
-router.get('/businessBrowseView', (req, res) => {
+router.get('/businessBrowseView', connectEnsureLogin.ensureLoggedIn('/businessLogin'), (req, res) => {
     res.render('businessBrowse.ejs');
 })
 

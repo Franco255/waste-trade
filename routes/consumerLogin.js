@@ -10,7 +10,8 @@ router.post('/', passport.authenticate('consumerLocal', {
     failureRedirect: '/consumerRegister'
 }), (req, res) => {
     const name = req.body.username;
-    console.log(name);
+    req.session.username = name;
+
     // res.send('login success')
     res.redirect(`/consumerDashboard/${name}`)
 })

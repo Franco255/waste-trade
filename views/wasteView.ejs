@@ -11,6 +11,8 @@
     Quantity: <%= details[0].quantity %><br>
     Seller's name: <%= details[0].consumerName %><br>
 
+    <a href="/chat/<%= details[0].consumerName %>">chat with seller</a>
+
     <form action="/wasteView/buyWithToken" method="post">
         <h3>Buy using your tokens:</h3>
         <input type="hidden" name="consumerName" value="<%= details[0].consumerName %>">

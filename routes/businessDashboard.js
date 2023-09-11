@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const connectEnsureLogin = require('connect-ensure-login');
 const router = express.Router();
 const {MongoClient} = require('mongodb');
 const sendSMS = require('../utils/sendSMS');
@@ -7,7 +8,7 @@ const sendSMS = require('../utils/sendSMS');
 let uri = process.env.MONGO_URI;
 uri = uri.replace('<password>', process.env.MONGO_PASS);
 
-router.get('/:name', (req, res) => {
+router.get('/:name', connectEnsureLogin.ensureLoggedIn('/businessLogin'), (req, res) => {
     const {name} = req.params;
 
     //querying the db for the amount of tokens available

@@ -43,7 +43,8 @@ app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
-    cookie: {maxAge: 60*60*60 }
+    cookie: {maxAge: 60*60*60 },
+    cookie: { secure: false }
 }))
 
 app.use(flash());

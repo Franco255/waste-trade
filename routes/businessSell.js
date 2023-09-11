@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
+const connectEnsureLogin = require('connect-ensure-login');
 const BusinessSellModel = require('../models/businessSellModel');
 // const {upload} = require('../utils/fileHelper');
 const storage = multer.memoryStorage();
 const upload = multer({storage: storage});
 
-router.get('/:name', (req, res) => {
+router.get('/:name', connectEnsureLogin.ensureLoggedIn('/businessLogin'), (req, res) => {
     const {name} = req.params;
     res.render('businessSell.ejs', {query: name})
 })

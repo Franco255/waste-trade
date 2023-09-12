@@ -14,6 +14,10 @@
 }
 
 .input-box {
+    resize: none;
+    overflow-y: hidden;
+    min-height: 40px;
+    max-height: 200px;
     width: 80%;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

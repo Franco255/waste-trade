@@ -68,7 +68,13 @@ module.exports = function (io) {
     router.get('/:recipient', (req, res) => {
         const { recipient } = req.params;
         const sender = req.session.username;
-        res.render('chat.ejs', { recipient, sender }); // Pass the recipient's name to the chat.ejs template
+        console.log(sender);
+        if(sender !== undefined){
+            // Pass the recipient's name to the chat.ejs template
+            res.render('chat.ejs', { recipient, sender }); 
+        } else {
+            res.send('make sure that you are logged in to use messaging feature')
+        }
     });
 
     return router;

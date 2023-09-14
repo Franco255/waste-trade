@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>productView</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
     <img src="<%= details[0].imageDataBase64 %>" alt="wasteItem" width="400"><br>
@@ -12,6 +13,28 @@
     Product Description: <%= details[0].description %><br>
     Quantity: <%= details[0].quantity %><br>
     Seller's name: <%= details[0].businessName %><br>
+    <br>
+    <button type="button" onclick="openForm()">Add to cart</button>
+
+    <div class="formPopup" id="popupForm">
+        <form action="/cart/addToCart" method="post" class="formContainer">
+            <input type="number" id="quantity"
+                placeholder="quantity"><br>
+            <input type="hidden" name="productId" 
+                value="<%= details[0]._id %>">
+            <button type="submit" onclick="closeForm()">Add to cart</button>
+            <button type="button" onclick="closeForm()">Cancel</button>
+        </form>
+    </div>
+
+    <script>
+        function openForm() {
+            document.getElementById('popupForm').style.display = 'block';
+        }
+        function closeForm() {
+            document.getElementById('popupForm').style.display = 'none';
+        }
+    </script>
     
 </body>
 </html>

@@ -53,3 +53,43 @@
 .message-text {
     word-wrap: break-word; /* Wrap long words in messages */
 }
+
+/* for add to cart form */
+.formPopup {
+    display: none;
+    position: fixed;
+    left: 45%;
+    top: 5%;
+    transform: translate(-50%, 5%);
+    border: 3px solid #999999;
+    z-index: 9;
+    border-radius: 10px;
+  }
+
+  .formContainer {
+    max-width: 300px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+  }
+
+
+  .formContainer .btn {
+    padding: 12px 20px;
+    border: none;
+    background-color: #8ebf42;
+    color: #fff;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 15px;
+    opacity: 0.8;
+  }
+
+  .formContainer .cancel {
+    background-color: #cc0000;
+  }
+
+  .formContainer .btn:hover,
+  .openButton:hover {
+    opacity: 1;
+  }

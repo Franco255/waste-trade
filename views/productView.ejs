@@ -18,10 +18,12 @@
 
     <div class="formPopup" id="popupForm">
         <form action="/cart/addToCart" method="post" class="formContainer">
-            <input type="number" id="quantity"
+            <input type="number" name="quantity"
                 placeholder="quantity"><br>
             <input type="hidden" name="productId" 
                 value="<%= details[0]._id %>">
+            <input type="hidden" name="redirectUrl"
+                id="redirectUrl" value="">
             <button type="submit" onclick="closeForm()">Add to cart</button>
             <button type="button" onclick="closeForm()">Cancel</button>
         </form>
@@ -34,6 +36,7 @@
         function closeForm() {
             document.getElementById('popupForm').style.display = 'none';
         }
+        document.getElementById('redirectUrl').value = window.location.href;
     </script>
     
 </body>

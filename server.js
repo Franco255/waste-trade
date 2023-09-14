@@ -29,6 +29,7 @@ const businessDashboard = require('./routes/businessDashboard');
 const wasteView = require('./routes/wasteView');
 const productView = require('./routes/productView');
 const chat = require('./routes/chat');
+const cart = require('./routes/cart');
 
 
 //configuring the view engine
@@ -99,6 +100,8 @@ app.use('/wasteView', wasteView)
 app.use('/productView', productView)
 
 app.use('/chat', chat(io))
+
+app.use('/cart', cart)
 
 app.all('*', (req, res) => {
     res.status(404).send('404! Oooops sorry Page Not Found')

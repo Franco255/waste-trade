@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
 
             const options = {
                 projection: {
-                  _id: 0,
+                  _id: 1,
                   businessName: 1,
                   productName: 1,
                   productPrice: 1,

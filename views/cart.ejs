@@ -1,1 +1,23 @@
-<!-- use this to view all the products added in the cart  -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+</head>
+<body>
+    <h1>Cart Items</h1>
+    <ul id="cartItems">
+        <% items.forEach((item, index) => { %>
+            <li>
+                <div><img src="<%= item.imageDataBase64 %>" alt="productImage" width="100" height="100"></div>
+                <div>Name: <%= item.productName %></div>
+                <div>Price: <%= item.productPrice %> Tsh</div>
+                <div>Quantity: <%= quantity[index] %></div>
+            </li>
+        <% }); %>
+    </ul>
+
+   
+</body>
+</html>

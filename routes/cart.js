@@ -29,7 +29,6 @@ router.get('/:name', (req, res) => {
             for(var i = 0; i < cartItems.length; i++) {
                 var productId = cartItems[i].productId;
                 quantity[i] = cartItems[i].quantity;
-                console.log(productId, quantity);
 
                 var id = new ObjectId(productId);
 
@@ -44,17 +43,8 @@ router.get('/:name', (req, res) => {
                     };
                 });
             }
-            // console.log(cartItemsDetailsImage);
             //turning into a one dimensional array
             const cartItemsOne = cartItemsDetailsImage.flat();
-            console.log(cartItemsOne.length);
-
-            const cartItemsJson = JSON.parse(JSON.stringify(cartItemsOne));
-
-            //sending json to frontend
-            // res.json(cartItemsJson);
-
-            // res.send(`${cartItemsDetails} - ${quantity} - ${cartItemsDetailsImage}`);
             res.render('cart.ejs', {items: cartItemsOne, quantity: quantity})
         } finally {
             await client.close()

@@ -1,3 +1,18 @@
+body {
+  background-color: #dbf0e1;
+}
+
+.container {
+  position: absolute;
+  left: 40%;
+  max-width: 900px;
+  width: 400px;
+  height: 400px;
+  padding: 20px;
+  background-color: #7add7a;
+  border-radius: 10px;
+}
+
 /* CSS styles for message container and chat bubbles */
 .chat-container {
     width: 80%; /* Adjust to your preferred width */

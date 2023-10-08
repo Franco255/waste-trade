@@ -5,8 +5,8 @@ const router = express.Router();
 const cartModel = require('../models/cartModel');
 const {MongoClient, ObjectId} = require('mongodb');
 
-router.get('/:name', (req, res) => {
-    const {name} = req.params
+router.get('/', (req, res) => {
+    const name = req.session.username;
 
     //fetch the cart items from collection to display in views
     let uri = process.env.MONGO_URI;
@@ -45,13 +45,13 @@ router.get('/:name', (req, res) => {
             }
             //turning into a one dimensional array
             const cartItemsOne = cartItemsDetailsImage.flat();
+            console.log(cartItemsOne);
             res.render('cart.ejs', {items: cartItemsOne, quantity: quantity})
         } finally {
-            await client.close()
+            // await client.close()
         }
     }
     fetchFromCartModel()
-    // res.render('cart.ejs');
 })
 
 
@@ -69,6 +69,32 @@ router.post('/addToCart', (req, res) => {
     newItem.save();
 
     res.redirect(redirectUrl)
+})
+
+//deleting item from cart
+router.get('/deleteFromCart/:id', (req, res) => {
+    //delete logic
+    const {id} = req.params;
+
+    let uri = process.env.MONGO_URI;
+    uri = uri.replace('<password>', process.env.MONGO_PASS);
+
+    const client = new MongoClient(uri);
+
+    async function deleteFromCartModel() {
+        try{
+            const db = client.db('test');
+            const cartmodels = db.collection('cartmodels');
+
+            //deleting from cartmodels
+            cartmodels.deleteOne({productId: id});
+
+            res.redirect('/cart')
+        } finally {
+            // client.close()
+        }
+    }
+    deleteFromCartModel();
 })
 
 module.exports = router

@@ -14,6 +14,7 @@
                 <div>Name: <%= item.productName %></div>
                 <div>Price: <%= item.productPrice %> Tsh</div>
                 <div>Quantity: <%= quantity[index] %></div>
+                <a href="/cart/deleteFromCart/<%= item._id %>">Remove from cart</a>
             </li>
         <% }); %>
     </ul>

@@ -1,7 +1,19 @@
-Welcome to Your Dashboard <%= consumerName %> <br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+<body>
+    Welcome to Your Dashboard <%= consumerName %> <br>
 
-<a href="/consumerSell/<%= consumerName %>">Sell waste</a><br>
-<a href="/consumerBrowse/consumerBrowseView">Browse Products</a><br>
-<a href="/cart/<%= consumerName %>">View Items in the cart</a><br><br>
+    <a href="/consumerSell/<%= consumerName %>">Sell waste</a><br>
+    <a href="/consumerBrowse/consumerBrowseView">Browse Products</a><br>
+    <a href="/cart">View Items in the cart</a><br><br>
 
-Your wallet Currently has: <%= tokens %> tokens
+    Your wallet Currently has: <%= tokens %> tokens
+
+</body>
+</html>

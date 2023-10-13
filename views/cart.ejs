@@ -4,20 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cart</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
+    You currently have <div id="token"> <%= tokens %> </div>Tokens you can use to get a discount
     <h1>Cart Items</h1>
     <ul id="cartItems">
         <% items.forEach((item, index) => { %>
             <li>
                 <div><img src="<%= item.imageDataBase64 %>" alt="productImage" width="100" height="100"></div>
                 <div>Name: <%= item.productName %></div>
-                <div>Price: <%= item.productPrice %> Tsh</div>
+                <div>Price: <%= item.productPrice * quantity[index]%> Tsh</div>
                 <div>Quantity: <%= quantity[index] %></div>
-                <a href="/cart/deleteFromCart/<%= item._id %>">Remove from cart</a>
+                <div>
+                    <button type="button" onclick="openForm(`<%= JSON.stringify(item) %>, <%= index %>`)">Buy</button>
+
+                    <div class="formPopup" id="popupForm">
+                        <form action="/cart/buy" method="post" class="formContainer">
+                            <!-- 1 token = 15Tsh  -->
+                            <div>Current Price: <div id="productPrice"><%= item.productPrice * quantity[index] %></div></div>
+                            <div>Price after discount: <span id="newPrice"></span> </div>
+                            <input type="number" id="discount" oninput="checkTokens()"><br>
+                            <button type="submit">Buy</button>
+                            <button type="button" onclick="closeForm()" style="color: red;">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+                <a href="/cart/deleteFromCart/<%= item._id %>"><button>Remove from cart</button></a>
             </li>
         <% }); %>
     </ul>
+
+    <script>
+        function openForm() {
+            document.getElementById('popupForm').style.display = 'block'
+        }
+        function closeForm() {
+            document.getElementById('popupForm').style.display = 'none'
+        }
+        function checkTokens() {
+            const tokens = parseInt(document.getElementById('token').innerHTML);
+            const discount = parseInt(document.getElementById('discount').value);
+            const productPrice = parseInt(document.getElementById('productPrice').innerHTML);
+            console.log(discount);
+            
+            if (discount > tokens) {
+                console.log('thats an error dear');
+            }else {
+                if(!isNaN(discount)) {
+                    const tokensUsed = discount * 15;
+                    const newPrice = productPrice - tokensUsed
+
+                    document.getElementById('newPrice').textContent = newPrice;
+                } else {
+                    document.getElementById('newPrice').textContent = "";
+                }
+            }
+            
+        }
+    </script>
 
    
 </body>

@@ -1,26 +1,37 @@
-<form action="/businessSell/<%= query %>" method="POST" enctype="multipart/form-data">
-    <!-- <h2>What are you selling?</h2> -->
-    <h2>Upload Your Product Below...</h2>
-    <!-- <input type="radio" name="wasteType" id="wasteType" value="plastics">Plastics <br>
-    <input type="radio" name="wasteType" id="wasteType" value="electronics">Electronics <br> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+<body>
+    <form action="/businessSell/<%= query %>" method="POST" enctype="multipart/form-data">
+        <!-- <h2>What are you selling?</h2> -->
+        <h2>Upload Your Product Below...</h2>
+        <!-- <input type="radio" name="wasteType" id="wasteType" value="plastics">Plastics <br>
+        <input type="radio" name="wasteType" id="wasteType" value="electronics">Electronics <br> -->
+        
+        <h2>Quantity Available</h2>
+        <input type="number" name="productQuantity" id="productQuantity" value="productQuantity"> Pc
     
-    <h2>Quantity Available</h2>
-    <input type="number" name="productQuantity" id="productQuantity" value="productQuantity"> Pc
-
-    <h2>Product Name:</h2><br>
-    <input type="text" name="productName" id="productName">
-    <br>
-    <h2>Product Price:</h2>
-    <input type="number" name="productPrice" id="productPrice">
-    <br>
-    <h2>Description:</h2>
-    <textarea name="productDescription" id="productDescription" cols="30" rows="5">
-        provide description here..
-    </textarea>
-    
-    <h3>Upload Image of product</h3>
-    <input type="file" id="productPicture" name="productImage" /><br>
-    <br>
-    <button type="submit">submit</button>
-    
+        <h2>Product Name:</h2><br>
+        <input type="text" name="productName" id="productName">
+        <br>
+        <h2>Product Price:</h2>
+        <input type="number" name="productPrice" id="productPrice">
+        <br>
+        <h2>Description:</h2>
+        <textarea name="productDescription" id="productDescription" cols="30" rows="5">
+            provide description here..
+        </textarea>
+        
+        <h3>Upload Image of product</h3>
+        <input type="file" id="productPicture" name="productImage" /><br>
+        <br>
+        <button type="submit">submit</button>
+        
     </form>
+</body>
+</html>

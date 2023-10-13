@@ -18,7 +18,12 @@ router.get('/', (req, res) => {
         try {
             const db = client.db('test');
             const cartmodels = db.collection('cartmodels');
+            const consumers = db.collection('consumers');
             const businesssellmodels = db.collection('businesssellmodels');
+
+            //querying the token amount
+            const tokenAmount = await consumers.find({username: name}).toArray();
+            const tokens = tokenAmount[0].tokenAmount;
 
             const cartItems = await cartmodels.find({consumerName: name}).toArray();
             //use loop to iterate over the array
@@ -45,8 +50,11 @@ router.get('/', (req, res) => {
             }
             //turning into a one dimensional array
             const cartItemsOne = cartItemsDetailsImage.flat();
-            console.log(cartItemsOne);
-            res.render('cart.ejs', {items: cartItemsOne, quantity: quantity})
+            // console.log(cartItemsOne);
+            res.render('cart.ejs', {items: cartItemsOne, quantity: quantity, tokens: tokens})
+        } catch(error) {
+            console.error('Error fetching data from the database:', error);
+            res.status(500).send('Internal Server Error');
         } finally {
             // await client.close()
         }

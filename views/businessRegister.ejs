@@ -1,18 +1,31 @@
-<h1> Registration for Businesses </h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1> Registration for Businesses </h1>
 
-<form action="/businessRegister" method="POST">
-	<input type="text" id="name" name="name"
-		placeholder="business name"><br>
-  <input type="text" id="phoneNumber" name="phoneNumber"
-    placeholder="Phone Number"><br>
-  <input type="text" id="email" name="email"
-    placeholder="email address"><br>
-  <input type="password" name="password"
-		placeholder="password"><br>
-        <h4>select type of material you mostly deal with</h4>
-    <input type="radio" name="businessType" id="businessType" value="plastics">plastics <br>
-    <input type="radio" name="businessType" id="businessType" value="electronics">electronics <br>
-	<button type="submit">Submit</button>
-</form>
+  <form action="/businessRegister" method="POST">
+    <input type="text" id="name" name="name"
+      placeholder="business name"><br>
+    <input type="text" id="phoneNumber" name="phoneNumber"
+      placeholder="Phone Number"><br>
+    <input type="text" id="email" name="email"
+      placeholder="email address"><br>
+    <input type="password" name="password"
+      placeholder="password"><br>
+          <h4>select type of material you mostly deal with</h4>
+      <input type="radio" name="businessType" id="businessType" value="plastics">plastics <br>
+      <input type="radio" name="businessType" id="businessType" value="electronics">electronics <br>
+    <button type="submit">Submit</button>
+  </form>
 
-<li><a href="/businessLogin">Login</a></li>
+  <li><a href="/businessLogin">Login</a></li>
+  </div>
+</body>
+</html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -39,5 +39,110 @@
         document.getElementById('redirectUrl').value = window.location.href;
     </script>
     
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>productView</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        img {
+            max-width: 70%;
+            height: 200px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        button {
+            background-color: #004F1D;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        button:hover {
+            background-color: #002F1D;
+        }
+
+        .formPopup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .formContainer {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin: 20% auto;
+            padding: 20px;
+            text-align: center;
+            max-width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <img src="<%= details[0].imageDataBase64 %>" alt="wasteItem">
+    <h2><%= details[0].productName %></h2>
+    <p>Price: <%= details[0].productPrice %> Tsh</p>
+    <p>Product Description: <%= details[0].description %></p>
+    <p>Quantity: <%= details[0].quantity %></p>
+    <p>Seller's name: <%= details[0].businessName %></p>
+    <br>
+    <button type="button" onclick="openForm()">Add to Cart</button>
+
+    <div class="formPopup" id="popupForm">
+        <form action="/cart/addToCart" method="post" class="formContainer">
+            <input type="number" name="quantity" placeholder="Quantity">
+            <input type="hidden" name="productId" value="<%= details[0]._id %>">
+            <input type="hidden" name="redirectUrl" id="redirectUrl" value="">
+            <button type="submit" onclick="closeForm()">Add to Cart</button>
+            <button type="button" onclick="closeForm()">Cancel</button>
+        </form>
+    </div>
+
+    <script>
+        function openForm() {
+            document.getElementById('popupForm').style.display = 'block';
+        }
+        function closeForm() {
+            document.getElementById('popupForm').style.display = 'none';
+        }
+        document.getElementById('redirectUrl').value = window.location.href;
+    </script>
 </body>
 </html>

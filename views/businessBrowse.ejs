@@ -1,4 +1,4 @@
-<!-- waste.ejs -->
+<!-- waste.ejs
 
 <!DOCTYPE html>
 <html>
@@ -51,6 +51,115 @@
 
     fetchWaste();
     
+  </script>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Waste List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #004F1D;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 28px;
+      margin: 20px 0;
+      color: #fff;
+    }
+
+    ul#WasteList {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    li {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      margin: 10px;
+      padding: 20px;
+      width: 300px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s;
+    }
+
+    li:hover {
+      transform: translateY(-5px);
+    }
+
+    a {
+      text-decoration: none;
+      color: #004F1D;
+    }
+
+    a:hover {
+      color: #002F1D;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Waste List</h1><hr>
+  <ul id="WasteList"></ul>
+
+  <script>
+    // Function to handle the click event and send data
+    function handleItemClick(wasteId) {
+      console.log(wasteId);
+      // Create a URL for the "/wasteView" route with the wasteId as a query parameter
+      const url = `/wasteView?wasteId=${wasteId}`;
+
+      // Navigate to the "/wasteView" route
+      window.location.href = url;
+    }
+
+    // JavaScript to fetch and render product data
+    async function fetchWaste() {
+      try {
+        const response = await fetch('/businessBrowse');
+        const waste = await response.json();
+
+        const wasteListElement = document.getElementById('WasteList');
+
+        // using map to list the fetched elements
+        const wasteItems = waste.map(waste => {
+          return `
+              <li>
+                <a href="#" onclick="handleItemClick('${waste._id}')">
+                <strong>${waste.wasteType}</strong><br> 
+                <img src="${waste.imageDataBase64}" alt="Waste Image"><br>
+                Quantity: ${waste.quantity}<br>
+                Description: ${waste.description}<br>
+                </a>
+                </li>
+                `;
+        });
+
+        wasteListElement.innerHTML = wasteItems.join('')
+      } catch (error) {
+        console.log(`encountered the following error while fetching: ${error}`);
+      }
+    }
+
+    fetchWaste();
+
   </script>
 
 </body>

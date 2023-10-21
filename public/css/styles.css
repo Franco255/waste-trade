@@ -9,7 +9,7 @@ body {
   width: 400px;
   height: 400px;
   padding: 20px;
-  background-color: #7add7a;
+  background-color: #004F1D;
   border-radius: 10px;
 }
 
@@ -92,7 +92,7 @@ body {
   .formContainer .btn {
     padding: 12px 20px;
     border: none;
-    background-color: #8ebf42;
+    background-color: #004F1D;
     color: #fff;
     cursor: pointer;
     width: 100%;

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,4 +16,123 @@
     Your wallet Currently has: <%= tokens %> tokens
 
 </body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consumer Dashboard</title>
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar {
+    background-color: #004F1D;
+    color: #fff;
+    width: 250px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.logo {
+    padding: 20px;
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+}
+
+.menu li {
+    margin: 10px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #fff;
+    display: block;
+}
+
+.content {
+    margin-left: 250px;
+    padding: 20px;
+}
+
+.header {
+    background-color: #f0f0f0;
+    padding: 20px;
+    text-align: center;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.card {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 10px;
+    width: calc(33% - 20px);
+}
+
+.top-right {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <img src="your-logo.png" alt="Logo">
+        </div>
+        <ul class="menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Settings</a></li>
+        </ul>
+    </div>
+    
+    <div class="content">
+        <div class="header">
+            <h1>Welcome to Waste Trade <%= consumerName %></h1>
+        </div>
+
+        <div class="cards">
+            <div class="card">
+                <a href="/consumerSell/<%= consumerName %>"><h2>Sell Waste</h2></a>
+                <!-- Content for the "Sell Waste" card goes here -->
+            </div>
+            <div class="card">
+                <a href="/consumerBrowse/consumerBrowseView"><h2>Browse Products</h2></a>
+                <!-- Content for the "Browse Products" card goes here -->
+            </div>
+            <div class="card">
+                <a href="/cart"><h2>View Items in Cart</h2></a>
+                <!-- Content for the "View Items in Cart" card goes here -->
+            </div>
+        </div>
+    </div>
+
+    <div class="top-right">
+        Your wallet Currently has: <em style="color: #004F1D;"><%= tokens %> tokens</em>
+    </div>
+</body>
 </html>
+
+

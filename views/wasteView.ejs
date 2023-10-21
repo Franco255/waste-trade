@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -25,5 +25,90 @@
         <button value="submit">BUY</button>
     </form>
     
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wasteView</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        img {
+            max-width: 50%;
+            height: 100px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+
+        input[type="number"],
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+
+        button {
+            background-color: #004F1D;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #002F1D;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+
+        a:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <img src="<%= details[0].imageDataBase64 %>" alt="wasteItem">
+    <p>Product Description: <%= details[0].description %></p>
+    <p>Quantity: <%= details[0].quantity %></p>
+    <p>Seller's name: <%= details[0].consumerName %></p>
+    
+    <a href="/chat/<%= details[0].consumerName %>">Chat with seller</a>
+
+    <form action="/wasteView/buyWithToken" method="post">
+        <h3>Buy using your tokens:</h3>
+        <input type="hidden" name="consumerName" value="<%= details[0].consumerName %>">
+        <input type="number" id="tokenAmount" name="tokenAmount" placeholder="Tokens Agreed Upon">
+        <input type="text" id="businessName" name="businessName" placeholder="Your business name">
+        <input type="password" id="walletPass" name="walletPass" placeholder="Your wallet password">
+        <button type="submit">BUY</button>
+    </form>
 </body>
 </html>

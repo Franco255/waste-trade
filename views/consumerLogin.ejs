@@ -1,25 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
-    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /* CSS styles as before */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .registration-container {
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 50px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .registration-container h2 {
+            margin: 10px 0;
+        }
+
+        .registration-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .input-group {
+            margin: 10px 0;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+		
+
+        .submit-button {
+            background-color: #004F1D;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+		.submit-button:hover {
+			background-color: #002F1D;
+		}
+
+        .login-link {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .login-link a {
+            text-decoration: none;
+            color: #004F1D;
+        }
+		.login-link a:hover{
+			color: #002F1D;
+		}
+        
+        .logo {
+            text-align: center;
+        }
+
+        .logo img {
+            width: 150px; /* Adjust the width as needed */
+        }
+    </style>
 </head>
 <body>
-	<div class="container">
-		<h1>login</h1>
-
-		<form action="/consumerLogin" method="POST">
-			<input type="text" name="username"
-				placeholder="full name"><br>
-			<input type="password" name="password"
-				placeholder="Password"><br>
-			<button>login</button><br>
-		</form>
-
-		<li><a href="forgot.ejs">Forgot password</a></li>
-		<li><a href="/consumerRegister">Sign up!!</a></li>
-	</div>
+    <div class="registration-container">
+        <div class="logo">
+            <img src="your-logo.png" alt="Website Logo">
+        </div>
+        <h2>Customer <em style="color: #004F1D;">Login</em></h2>
+        <form class="registration-form" action="/consumerLogin" method="POST">
+            <div class="input-group">
+                <input type="text" name="username" placeholder="Full Name" required>
+            </div>
+            <div class="input-group">
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="submit-button">Login</button>
+        </form>
+        <div class="login-link">
+            <a href="forgot.ejs">Forgot Password?</a> | <a href="/consumerRegister">Not registered?</a>
+        </div>
+    </div>
 </body>
 </html>

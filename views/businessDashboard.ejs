@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -46,5 +46,131 @@ Price: <span id="priceDisplay">0 Tsh</span>
     }
 </script>
      
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        #sidebar {
+            height: 565px;
+            width: 250px;
+            background-color: #004F1D ;
+            color: #fff;
+            padding: 20px;
+        }
+
+        #content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h3 {
+            text-align: center;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+
+        a:hover {
+            color: #0056b3;
+        }
+
+        form {
+            display: flex;
+            align-items: center;
+        }
+
+        input[type="number"] {
+            width: 60px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        button {
+            background-color: #004F1D;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #002F1D;
+        }
+    </style>
+</head>
+<body>
+    <div id="sidebar">
+        <h4>MENU</h4>
+        <ul>
+            <li><a href="/businessSell/<%= query %>">Upload new product(s)</a></li>
+            <li><a href="/businessBrowse/businessBrowseView">Browse materials</a></li>
+        </ul>
+    </div>
+    <div id="content">
+        <div class="container">
+            <h3>Welcome to Your Business' Dashboard</h3>
+
+            <p>Your company: <%= query %>'s wallet currently has: <%= tokens %> tokens</p>
+
+            <h3>Buy more tokens 💠</h3>
+            <p>Rate: 1 💠 = 20 Tsh</p>
+
+            <h4>How many tokens do you want to buy?</h4>
+            <form action="/businessDashboard/<%= query %>" method="post" onsubmit="return validateForm()">
+                <input type="number" name="token" id="tokenInput" required oninput="calculatePrice()">
+                <button type="submit">BUY</button>
+            </form>
+
+            <p>Price: <span id="priceDisplay">0 Tsh</span></p>
+        </div>
+    </div>
+
+    <script>
+        function validateForm() {
+            var tokenInput = document.getElementById('tokenInput').value;
+
+            if (isNaN(tokenInput) || tokenInput === '') {
+                alert('Please enter a valid number of tokens');
+                return false;
+            }
+
+            return true;
+        }
+
+        function calculatePrice() {
+            var tokenInput = document.getElementById('tokenInput').value;
+            var price = tokenInput * 20;
+            var priceDisplay = document.getElementById('priceDisplay');
+            priceDisplay.textContent = price + ' Tsh';
+        }
+    </script>
 </body>
 </html>
